@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>| Psychic-Game |</title>
+</head>
+<body>
+	<h1>
+		<span>The Psychic Game</span>
+	</h1>
+	<div id="game">
+			
+	</div>
+	<script type="text/javascript">
+		var keys = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+		var guessed = [];
+		var wins=0;
+		var losses=0;
+		var guessesLeft=10;
+		var userGuess=0;
+		var computerGuess=0;
+		var idDiv = document.getElementById("game");
+
+		idDiv.innerHTML = "<p> Guess what letter I am thinking of: " +"</p>" + "<p> Computer Guess: " + computerGuess + "</p>" + "<p> Wins: " + wins + "</p>" + "<p> losses: " + losses + "</p>"
+		    + "<p> Guesses Left: " + guessesLeft + "</p>" + "<p> Your guesses so far: " + guessed;
+
+	 	document.onkeyup = function(event) {
+	 	var userGuess = event.key;	
+		var computerGuess = keys[Math.floor(Math.random() * keys.length)];
+		
+		if (userGuess !== computerGuess) {     //Compare the guesses
+			guessesLeft--;
+			guessed.push(userGuess);           //Push to the Guessed list 
+			if (guessesLeft === 0) {
+				losses++
+				guessesLeft = 10;
+				guessed = [];                  // Empty the guessed list after reset
+			}
+		}
+
+		if (userGuess === computerGuess) {
+			wins++;
+			guessesLeft=10;
+		}
+
+		idDiv.innerHTML = "<p> Guess what letter I am thinking of: " + userGuess +"</p>" + "<p> Computer Guess: " + computerGuess + "</p>" + "<p> Wins: " + wins + "</p>" + "<p> losses: " + losses + "</p>"
+		    + "<p> Guesses Left: " + guessesLeft + "</p>" + "<p> Your guesses so far: " + guessed;
+		};
+
+	</script>
+</body>
+</html>
